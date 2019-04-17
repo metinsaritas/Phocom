@@ -22,12 +22,13 @@ import java.util.TimerTask;
 public class ConnectNetworkActivity extends AppCompatActivity {
 
     private Wifi wifi;
+    private String wifiJson = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect_network);
 
-        String wifiJson = getIntent().getStringExtra(MainConnectFragment.WIFI_JSON);
+        wifiJson = getIntent().getStringExtra(MainConnectFragment.WIFI_JSON);
         wifi = new Gson().fromJson(wifiJson, Wifi.class);
 
         //Toast.makeText(this, wifi.getSsid() + " " +wifi.getPassword(), Toast.LENGTH_SHORT).show();
@@ -36,7 +37,7 @@ public class ConnectNetworkActivity extends AppCompatActivity {
         intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         final WifiReceiver receiver = new WifiReceiver();
         registerReceiver(receiver, intentFilter);
-        //connectWifi();
+        //connectWifi(); TODO: don't forget this
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -45,7 +46,6 @@ public class ConnectNetworkActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
                         try {
                             unregisterReceiver(receiver);
                         } catch (IllegalArgumentException e) {
@@ -81,6 +81,7 @@ public class ConnectNetworkActivity extends AppCompatActivity {
     private void connectedActivity () {
         Intent intent = new Intent(this, ConnectedActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra(MainConnectFragment.WIFI_JSON, wifiJson);
         startActivity(intent);
         finish();
     }
