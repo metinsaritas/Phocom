@@ -11,10 +11,22 @@ public class Comminucation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comminucation);
 
-        RecorderThread recorderThread = new RecorderThread("255.255.255.255");
+        /* TODO: Earpiece and Headphone control
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setMode(AudioManager.STREAM_MUSIC);
+        audioManager.setSpeakerphoneOn(false);
+        */
+        String localIpAddress = Utils.getLocalIpAddress(this);
+
+        String[] ipAddressOctet = localIpAddress.split("\\.");
+        ipAddressOctet[3] = "255";
+
+        String destination = Utils.join(".",ipAddressOctet);
+
+        RecorderThread recorderThread = new RecorderThread(destination);
         recorderThread.start();
 
-        PlayerThread playerThread = new PlayerThread(Utils.getLocalIpAddress(this));
+        PlayerThread playerThread = new PlayerThread(localIpAddress);
         playerThread.start();
     }
 }

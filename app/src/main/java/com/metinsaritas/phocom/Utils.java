@@ -26,7 +26,7 @@ public class Utils {
         }
 
         InetAddress myInetIP = null;
-        String myIP = "[NO]";
+        String myIP = "192.168.43.255"; //"[NO]";
         try {
             myInetIP = InetAddress.getByAddress(array);
             myIP = myInetIP.getHostAddress();
@@ -35,5 +35,13 @@ public class Utils {
         }
 
         return myIP;
+    }
+
+    public static String join (String delimeter, String[] arr) {
+        String ret = "";
+        for (String e:arr) {
+            ret += delimeter + e;
+        }
+        return ret.substring(1);
     }
 }
