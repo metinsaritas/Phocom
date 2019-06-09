@@ -20,12 +20,8 @@ public class PlayerThread extends Thread {
     private final static int TRACK_MIN_BUFF = AudioTrack.getMinBufferSize(RecorderThread.SAMPLE_RATE_IN_HZ, AudioFormat.CHANNEL_CONFIGURATION_MONO, RecorderThread.AUDIO_FORMAT);
 
     private String localIPAddress;
-    private Boolean isServer = false;
     public  PlayerThread (String localIPAddress) {
         this.localIPAddress = localIPAddress;
-        if (localIPAddress.equals("192.168.43.255")) {
-            isServer = true;
-        }
     }
 
     @Override
@@ -33,7 +29,7 @@ public class PlayerThread extends Thread {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_AUDIO);
 
         //AudioManager.STREAM_MUSIC
-        final AudioTrack player = new AudioTrack(AudioManager.STREAM_MUSIC, RecorderThread.SAMPLE_RATE_IN_HZ, AudioFormat.CHANNEL_CONFIGURATION_MONO, RecorderThread.AUDIO_FORMAT, TRACK_MIN_BUFF, AudioTrack.MODE_STREAM);
+        final AudioTrack player = new AudioTrack(AudioManager.STREAM_VOICE_CALL, RecorderThread.SAMPLE_RATE_IN_HZ, AudioFormat.CHANNEL_CONFIGURATION_MONO, RecorderThread.AUDIO_FORMAT, TRACK_MIN_BUFF, AudioTrack.MODE_STREAM);
 
         player.play();
 
@@ -58,12 +54,6 @@ public class PlayerThread extends Thread {
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
                 InetAddress address = packet.getAddress();
-
-                if (isServer) {
-                    if (address.getHostAddress().equals("192.168.43.1")) {
-                        continue;
-                    }
-                }
 
                 if (address.getHostAddress().equals(localIPAddress)) {
                     continue;

@@ -82,12 +82,12 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:checked="false"
             android:id="@+id/fmcCbAuto"
             android:text="Send audio automatically" />
 
         <Button
-            android:enabled="false"
+            android:enabled="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/fmcBtnPush"
