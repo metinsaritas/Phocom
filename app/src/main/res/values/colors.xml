@@ -3,4 +3,21 @@
     <color name="colorPrimary">#00bcd4</color>
     <color name="colorPrimaryDark">#00bcd4</color>
     <color name="colorAccent">#026979</color>
+
+    <color name="signal5">#4CAF50</color>
+    <color name="signal4">#009688</color>
+    <color name="signal3">#8BC34A</color>
+    <color name="signal2">#FFEB3B</color>
+    <color name="signal1">#FF5722</color>
+    <color name="signal0">#F44336</color>
+
+    <array name="colorSignals">
+        <item>@color/signal0</item>
+        <item>@color/signal1</item>
+        <item>@color/signal2</item>
+        <item>@color/signal3</item>
+        <item>@color/signal4</item>
+        <item>@color/signal5</item>
+        <item>@color/signal5</item>
+    </array>
 </resources>

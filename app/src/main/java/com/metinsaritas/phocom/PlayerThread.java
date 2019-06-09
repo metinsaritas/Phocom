@@ -26,14 +26,13 @@ public class PlayerThread extends Thread {
         if (localIPAddress.equals("192.168.43.255")) {
             isServer = true;
         }
-
-
     }
 
     @Override
     public void run() {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_AUDIO);
 
+        //AudioManager.STREAM_MUSIC
         final AudioTrack player = new AudioTrack(AudioManager.STREAM_MUSIC, RecorderThread.SAMPLE_RATE_IN_HZ, AudioFormat.CHANNEL_CONFIGURATION_MONO, RecorderThread.AUDIO_FORMAT, TRACK_MIN_BUFF, AudioTrack.MODE_STREAM);
 
         player.play();

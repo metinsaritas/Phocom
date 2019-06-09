@@ -21,7 +21,7 @@ public class RecorderThread extends Thread {
 
     public static int RECORD_MIN_BUFF = AudioRecord.getMinBufferSize(SAMPLE_RATE_IN_HZ, AudioFormat.CHANNEL_CONFIGURATION_MONO, AUDIO_FORMAT);
 
-    private boolean status = true;
+    public static boolean canSendAudio = true;
     private AudioRecord recorder;
     private InetAddress address;
     public RecorderThread (String destination) {
@@ -45,11 +45,12 @@ public class RecorderThread extends Thread {
             recorder = new AudioRecord(MediaRecorder.AudioSource.VOICE_RECOGNITION, SAMPLE_RATE_IN_HZ, AudioFormat.CHANNEL_CONFIGURATION_MONO, AUDIO_FORMAT, RECORD_MIN_BUFF);
             recorder.startRecording();
 
-            while (status == true) {
-
-                RECORD_MIN_BUFF = recorder.read(buffer, 0, buffer.length);
-                packet = new DatagramPacket(buffer, buffer.length, address, port);
-                socket.send(packet);
+            while (true) {
+                if (canSendAudio) {
+                    RECORD_MIN_BUFF = recorder.read(buffer, 0, buffer.length);
+                    packet = new DatagramPacket(buffer, buffer.length, address, port);
+                    socket.send(packet);
+                }
             }
 
         } catch (UnknownHostException e) {

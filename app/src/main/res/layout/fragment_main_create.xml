@@ -1,14 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainCreateFragment">
+    tools:context=".MainCreateFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/fmcLlSignal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="30dp"
+        android:background="@color/signal0"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/signal0"
+            />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/signal1"
+            />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/signal2"
+            />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/signal3"
+            />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/signal4"
+            />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/signal5"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Server"
+            android:id="@+id/fmcTxtStatus"
+            android:textSize="20sp"
+            android:gravity="right"
+            android:paddingRight="4dp"
+            android:textColor="#E9D9D9"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:id="@+id/fmcIv"
+        android:src="@mipmap/logo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="40dp"
+        android:layout_above="@id/fmcLlSignal"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:background="@drawable/radius">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:id="@+id/fmcCbAuto"
+            android:text="Send audio automatically" />
+
+        <Button
+            android:enabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fmcBtnPush"
+            android:textAllCaps="false"
+            android:text="Press and Hold" />
+
+
+    </LinearLayout>
+        
+</RelativeLayout>
